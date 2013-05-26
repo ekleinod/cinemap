@@ -19,53 +19,19 @@ COMMENT = 'This table contains a unique id for all items. This is neede' /* comm
 
 
 -- -----------------------------------------------------
--- Table `cinemap_movies`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `cinemap_movies` ;
-
-CREATE  TABLE IF NOT EXISTS `cinemap_movies` (
-  `imdb_key` TEXT NOT NULL COMMENT 'IMDB key' ,
-  `wikipedia` TEXT NULL COMMENT 'Page name of the english Wikipedia.' ,
-  `marker` TEXT NULL COMMENT 'Name of the special marker, if needed. (overrides default marker)' ,
-  `id` INT NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_general_ci
-COMMENT = 'Stored movies.';
-
-
--- -----------------------------------------------------
--- Table `cinemap_reporters`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `cinemap_reporters` ;
-
-CREATE  TABLE IF NOT EXISTS `cinemap_reporters` (
-  `short` TEXT NOT NULL ,
-  `name` TEXT NULL COMMENT 'Full name.' ,
-  `mail` TEXT NULL COMMENT 'mail address' ,
-  `url` TEXT NULL COMMENT 'URL' ,
-  `id` INT NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_general_ci
-COMMENT = 'Reporters of locations.';
-
-
--- -----------------------------------------------------
 -- Table `cinemap_locations`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `cinemap_locations` ;
 
 CREATE  TABLE IF NOT EXISTS `cinemap_locations` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `item_id` INT UNSIGNED NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
   `latitude` DOUBLE NOT NULL ,
   `longitude` DOUBLE NOT NULL COMMENT 'Mandatory longitude of position.' ,
   `marker` TEXT NULL COMMENT 'Name of the special marker, if needed. (overrides default marker)' ,
-  `id` INT NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
-  `movie_id` INT NOT NULL ,
-  `reporter_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) )
+  UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci
@@ -78,15 +44,78 @@ COMMENT = 'Stored locations for a movie. Every location is linked to on' /* comm
 DROP TABLE IF EXISTS `cinemap_links` ;
 
 CREATE  TABLE IF NOT EXISTS `cinemap_links` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `item_id` INT UNSIGNED NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
   `url` TEXT NOT NULL ,
-  `id` INT NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
-  `movie_id` INT NULL COMMENT 'ID of the movie (if the link belongs to a movie)' ,
-  `location_id` INT NULL COMMENT 'ID of the location (if the link belongs to a location)' ,
-  PRIMARY KEY (`id`) )
+  UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci
 COMMENT = 'Internetlinks for entries.';
+
+
+-- -----------------------------------------------------
+-- Table `cinemap_movies`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cinemap_movies` ;
+
+CREATE  TABLE IF NOT EXISTS `cinemap_movies` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `item_id` INT UNSIGNED NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
+  `imdb_key` VARCHAR(20) NOT NULL COMMENT 'IMDB key' ,
+  `marker` VARCHAR(100) NULL COMMENT 'Name of the special marker, if needed. (overrides default marker)' ,
+  UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+COMMENT = 'Stored movies.';
+
+
+-- -----------------------------------------------------
+-- Table `cinemap_user_roles`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cinemap_user_roles` ;
+
+CREATE  TABLE IF NOT EXISTS `cinemap_user_roles` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `sid` VARCHAR(20) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  UNIQUE INDEX `tag_UNIQUE` (`sid` ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+COMMENT = 'Possible user roles.';
+
+
+-- -----------------------------------------------------
+-- Table `cinemap_users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cinemap_users` ;
+
+CREATE  TABLE IF NOT EXISTS `cinemap_users` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `item_id` INT UNSIGNED NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
+  `user_role_id` INT UNSIGNED NOT NULL COMMENT 'URL' ,
+  `username` VARCHAR(100) NOT NULL ,
+  `password` VARCHAR(128) NOT NULL COMMENT 'Full name.' ,
+  `salt` VARCHAR(128) NOT NULL COMMENT 'mail address' ,
+  `name` VARCHAR(100) NULL ,
+  `email` VARCHAR(100) NULL ,
+  `url` VARCHAR(100) NULL ,
+  `created` DATETIME NOT NULL ,
+  `modified` DATETIME NOT NULL ,
+  UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+COMMENT = 'Cinemap users.';
 
 
 -- -----------------------------------------------------
@@ -144,10 +173,55 @@ COLLATE = utf8_general_ci
 COMMENT = 'All user visible texts that can be translated.\nThis is a ver' /* comment truncated */;
 
 
+-- -----------------------------------------------------
+-- Table `cinemap_reference_roles`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cinemap_reference_roles` ;
+
+CREATE  TABLE IF NOT EXISTS `cinemap_reference_roles` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `title` VARCHAR(100) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  UNIQUE INDEX `tag_UNIQUE` (`title` ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+COMMENT = 'Possible reference roles.';
+
+
+-- -----------------------------------------------------
+-- Table `cinemap_references`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cinemap_references` ;
+
+CREATE  TABLE IF NOT EXISTS `cinemap_references` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `item_id` INT UNSIGNED NOT NULL ,
+  `referenced_item_id` INT UNSIGNED NOT NULL ,
+  `reference_role_id` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+COMMENT = 'This table contains alreferences between two items.';
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `cinemap_user_roles`
+-- -----------------------------------------------------
+START TRANSACTION;
+INSERT INTO `cinemap_user_roles` (`id`, `sid`) VALUES (1, 'reporter');
+INSERT INTO `cinemap_user_roles` (`id`, `sid`) VALUES (2, 'moderator');
+INSERT INTO `cinemap_user_roles` (`id`, `sid`) VALUES (3, 'administrator');
+
+COMMIT;
 
 -- -----------------------------------------------------
 -- Data for table `cinemap_text_types`
@@ -156,5 +230,15 @@ START TRANSACTION;
 INSERT INTO `cinemap_text_types` (`id`, `title`) VALUES (1, 'other');
 INSERT INTO `cinemap_text_types` (`id`, `title`) VALUES (2, 'title');
 INSERT INTO `cinemap_text_types` (`id`, `title`) VALUES (3, 'description');
+INSERT INTO `cinemap_text_types` (`id`, `title`) VALUES (4, 'wikipedia');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `cinemap_reference_roles`
+-- -----------------------------------------------------
+START TRANSACTION;
+INSERT INTO `cinemap_reference_roles` (`id`, `title`) VALUES (1, 'movie');
+INSERT INTO `cinemap_reference_roles` (`id`, `title`) VALUES (2, 'reporter');
 
 COMMIT;
