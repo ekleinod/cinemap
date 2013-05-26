@@ -29,7 +29,6 @@ CREATE  TABLE IF NOT EXISTS `cinemap_locations` (
   `latitude` DOUBLE NOT NULL ,
   `longitude` DOUBLE NOT NULL COMMENT 'Mandatory longitude of position.' ,
   `altitude` DOUBLE NULL ,
-  `direction` DOUBLE NULL ,
   `marker` TEXT NULL COMMENT 'Name of the special marker, if needed. (overrides default marker)' ,
   UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) ,
   PRIMARY KEY (`id`) ,
@@ -208,6 +207,29 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci
 COMMENT = 'This table contains alreferences between two items.';
+
+
+-- -----------------------------------------------------
+-- Table `cinemap_images`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cinemap_images` ;
+
+CREATE  TABLE IF NOT EXISTS `cinemap_images` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `item_id` INT UNSIGNED NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
+  `filename` VARCHAR(100) NOT NULL ,
+  `filepath` VARCHAR(100) NULL ,
+  `latitude` DOUBLE NULL ,
+  `longitude` DOUBLE NULL COMMENT 'Mandatory longitude of position.' ,
+  `altitude` DOUBLE NULL ,
+  `direction` DOUBLE NULL ,
+  UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+COMMENT = 'Images for a location, movie, user etc.';
 
 
 
