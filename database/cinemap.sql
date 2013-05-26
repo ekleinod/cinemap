@@ -28,6 +28,8 @@ CREATE  TABLE IF NOT EXISTS `cinemap_locations` (
   `item_id` INT UNSIGNED NOT NULL COMMENT 'Unique id (inherited from cinemap_id).' ,
   `latitude` DOUBLE NOT NULL ,
   `longitude` DOUBLE NOT NULL COMMENT 'Mandatory longitude of position.' ,
+  `altitude` DOUBLE NULL ,
+  `direction` DOUBLE NULL ,
   `marker` TEXT NULL COMMENT 'Name of the special marker, if needed. (overrides default marker)' ,
   UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) ,
   PRIMARY KEY (`id`) ,
@@ -212,33 +214,3 @@ COMMENT = 'This table contains alreferences between two items.';
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
--- -----------------------------------------------------
--- Data for table `cinemap_user_roles`
--- -----------------------------------------------------
-START TRANSACTION;
-INSERT INTO `cinemap_user_roles` (`id`, `sid`) VALUES (1, 'reporter');
-INSERT INTO `cinemap_user_roles` (`id`, `sid`) VALUES (2, 'moderator');
-INSERT INTO `cinemap_user_roles` (`id`, `sid`) VALUES (3, 'administrator');
-
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table `cinemap_text_types`
--- -----------------------------------------------------
-START TRANSACTION;
-INSERT INTO `cinemap_text_types` (`id`, `title`) VALUES (1, 'other');
-INSERT INTO `cinemap_text_types` (`id`, `title`) VALUES (2, 'title');
-INSERT INTO `cinemap_text_types` (`id`, `title`) VALUES (3, 'description');
-INSERT INTO `cinemap_text_types` (`id`, `title`) VALUES (4, 'wikipedia');
-
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table `cinemap_reference_roles`
--- -----------------------------------------------------
-START TRANSACTION;
-INSERT INTO `cinemap_reference_roles` (`id`, `title`) VALUES (1, 'movie');
-INSERT INTO `cinemap_reference_roles` (`id`, `title`) VALUES (2, 'reporter');
-
-COMMIT;
