@@ -10,6 +10,8 @@ DROP TABLE IF EXISTS `cinemap_items` ;
 
 CREATE  TABLE IF NOT EXISTS `cinemap_items` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `created` DATETIME NOT NULL ,
+  `modified` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB
@@ -163,8 +165,10 @@ CREATE  TABLE IF NOT EXISTS `cinemap_texts` (
   `item_id` INT UNSIGNED NOT NULL ,
   `language_id` INT UNSIGNED NOT NULL ,
   `text_type_id` INT UNSIGNED NOT NULL ,
-  `text_type` VARCHAR(100) NULL ,
-  `value` TEXT NOT NULL ,
+  `text_type` VARCHAR(100) NOT NULL ,
+  `value` TEXT NULL ,
+  `created` DATETIME NOT NULL ,
+  `modified` DATETIME NOT NULL ,
   UNIQUE INDEX `unique_index` (`item_id` ASC, `language_id` ASC, `text_type` ASC) ,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
   PRIMARY KEY (`id`) )
@@ -201,6 +205,8 @@ CREATE  TABLE IF NOT EXISTS `cinemap_references` (
   `item_id` INT UNSIGNED NOT NULL ,
   `referenced_item_id` INT UNSIGNED NOT NULL ,
   `reference_role_id` INT UNSIGNED NOT NULL ,
+  `created` DATETIME NOT NULL ,
+  `modified` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB
@@ -223,6 +229,7 @@ CREATE  TABLE IF NOT EXISTS `cinemap_images` (
   `longitude` DOUBLE NULL COMMENT 'Mandatory longitude of position.' ,
   `altitude` DOUBLE NULL ,
   `direction` DOUBLE NULL ,
+  `bearing` DOUBLE NULL ,
   UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
