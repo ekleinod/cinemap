@@ -166,7 +166,7 @@ CREATE  TABLE IF NOT EXISTS `cinemap_texts` (
   `language_id` INT UNSIGNED NOT NULL ,
   `text_type_id` INT UNSIGNED NOT NULL ,
   `text_type` VARCHAR(100) NULL ,
-  `value` TEXT NULL ,
+  `value` TEXT NOT NULL ,
   `created` DATETIME NOT NULL ,
   `modified` DATETIME NOT NULL ,
   UNIQUE INDEX `unique_index` (`item_id` ASC, `language_id` ASC, `text_type` ASC) ,
