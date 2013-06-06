@@ -71,6 +71,9 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		$this->set('user', $this->User->read(null, $id));
+
+		// set title
+		$this->set('title_for_layout', __('View user'));
 	}
 
 	/**
@@ -90,10 +93,11 @@ class UsersController extends AppController {
 			}
 		}
 		$userRoles = $this->User->UserRole->find('list');
-		asort($userRoles, SORT_LOCALE_STRING);
-		$people = $this->User->Person->find('list');
-		asort($people, SORT_LOCALE_STRING);
-		$this->set(compact('userRoles', 'people'));
+		ksort($userRoles, SORT_LOCALE_STRING);
+		$this->set(compact('userRoles'));
+
+		// set title
+		$this->set('title_for_layout', __('Add new user'));
 	}
 
 	/**
@@ -121,6 +125,9 @@ class UsersController extends AppController {
 		$userRoles = $this->User->UserRole->find('list');
 		$people = $this->User->Person->find('list');
 		$this->set(compact('userRoles', 'people'));
+
+		// set title
+		$this->set('title_for_layout', __('Edit user'));
 	}
 
 	/**
@@ -145,6 +152,9 @@ class UsersController extends AppController {
 		}
 		$this->Session->setFlash(__('User was not deleted'));
 		$this->redirect(array('action' => 'index'));
+
+		// set title
+		$this->set('title_for_layout', __('Delete user'));
 	}
 }
 

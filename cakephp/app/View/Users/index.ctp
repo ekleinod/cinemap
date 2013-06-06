@@ -1,5 +1,13 @@
 <?php echo $this->Session->flash('auth'); ?>
 
+<!-- header actions -->
+<?php echo $this->element('actions_header');	?>
+
+<!-- view filters -->
+<div class="filter">
+</div>
+
+<!-- view content -->
 <?php
 	if (empty($users)) {
 ?>
@@ -8,31 +16,35 @@
 	} else {
 ?>
 	<table>
-		<thead>
-			<tr>
-				<th><?php echo __('Nutzername'); ?></th>
-				<th><?php echo __('Rolle'); ?></th>
-				<th><?php echo __('Person'); ?></th>
-				<th><?php echo __('Aktionen'); ?></th>
-			</tr>
-		</thead>
+		<?php
+			$tags = array('thead', 'tfoot');
+			foreach ($tags as $tag) {
+		?>
+			<<?php echo $tag; ?>>
+				<tr>
+					<th><?php echo __('Item ID'); ?></th>
+					<th><?php echo __('ID'); ?></th>
+					<th><?php echo __('Username'); ?></th>
+					<th><?php echo __('User Role'); ?></th>
+					<th><?php echo __('Display Name'); ?></th>
+					<th><?php echo __('Email'); ?></th>
+					<th><?php echo __('URL'); ?></th>
+					<th><?php echo __('Actions'); ?></th>
+				</tr>
+			</<?php echo $tag; ?>>
+		<? } ?>
 		<tbody>
 			<?php
 				foreach ($users as $user):
 			?>
 				<tr>
-					<td><?php echo $this->Html->link(h($user['User']['username']), array('action' => 'view', $user['User']['id'])); ?></td>
-					<td>
-						<?php echo $this->Html->link($user['UserRole']['title'], array('controller' => 'user_roles', 'action' => 'view', $user['UserRole']['id'])); ?>
-					</td>
-					<td>
-						<?php echo $this->Html->link($user['Person']['title_person'], array('controller' => 'people', 'action' => 'view', $user['Person']['id'])); ?>
-					</td>
-					<td class="actions">
-						<?php echo $this->Html->link(__('Ansehen'), array('action' => 'view', $user['User']['id'])); ?>
-						<?php echo $this->Html->link(__('Editieren'), array('action' => 'edit', $user['User']['id'])); ?>
-						<?php echo $this->Form->postLink(__('Löschen'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
-					</td>
+					<td data-title="<?php echo __('Item ID'); ?>"><?php echo $this->Html->link($user['User']['item_id'], array('controller' => 'users', 'action' => 'view', $user['User']['id'])); ?></td>
+					<td data-title="<?php echo __('ID'); ?>"><?php echo $this->Html->link($user['User']['id'], array('controller' => 'users', 'action' => 'view', $user['User']['id'])); ?></td>
+					<td data-title="<?php echo __('Username'); ?>"><?php echo $this->Html->link($user['User']['username'], array('controller' => 'users', 'action' => 'view', $user['User']['id'])); ?></td>
+					<td data-title="<?php echo __('User Role'); ?>"><?php echo $this->Html->link($user['UserRole']['sid'], array('controller' => 'user_roles', 'action' => 'view', $user['UserRole']['id'])); ?></td>
+					<td data-title="<?php echo __('Display Name'); ?>"><?php echo $this->Html->link($user['User']['name'], array('controller' => 'users', 'action' => 'view', $user['User']['id'])); ?></td>
+					<td data-title="<?php echo __('Email'); ?>"><?php echo $this->Html->link($user['User']['email'], 'mailto:' . $user['User']['email']); ?></td>
+					<td data-title="<?php echo __('URL'); ?>"><?php echo $this->Html->link($user['User']['url']); ?></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>

@@ -388,12 +388,12 @@ form button:hover {
 	text-decoration: none;
 }
 
-a.access-editor,
+a.access-moderator,
 form button[type=reset]{
 	background: #aa3;
 }
 
-a.access-admin {
+a.access-administrator {
 	background: #c63;
 }
 
