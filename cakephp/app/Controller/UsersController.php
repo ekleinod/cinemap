@@ -15,7 +15,7 @@ class UsersController extends AppController {
 	 */
 	public function beforeFilter() {
 		parent::beforeFilter();
-		//$this->Auth->allow('add'); // this would allow users to register themselves, this is not used for now
+		$this->Auth->allow('add'); // this would allow users to register themselves, this is not used for now
 	}
 
 	/**
@@ -30,6 +30,9 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Invalid username or password, try again'));
 			}
 		}
+
+		// set title
+		$this->set('title_for_layout', __('Login'));
 	}
 
 	/**
@@ -46,8 +49,13 @@ class UsersController extends AppController {
 	 * @return void
 	 */
 	public function index() {
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
+		$users = $this->User->find('all');
+		//usort($users, array('UsersController', 'compareTo'));
+
+		$this->set('users', $users);
+
+		// set title
+		$this->set('title_for_layout', __('List of users'));
 	}
 
 	/**

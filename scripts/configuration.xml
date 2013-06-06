@@ -22,11 +22,11 @@
 	<property name="path:git" value="..${file.separator}..${file.separator}" />
 
 	<!--
-		Path to your refereemanager git repository.
+		Path to your cinemap git repository.
 		The declaration uses your git path, change if necessary.
-		Original: "<git-path>refereemanager/" = "${path:git}refereemanager${file.separator}"
+		Original: "<git-path>cinemap/" = "${path:git}cinemap${file.separator}"
 	-->
-	<property name="path:git:refereemanager" value="${path:git}refereemanager${file.separator}" />
+	<property name="path:git:cinemap" value="${path:git}cinemap${file.separator}" />
 
 	<!--
 		Path to your CakePHP git repository.
@@ -41,21 +41,6 @@
 		Original: "<git-path>phpmyadmin/" = "${path:git}phpmyadmin${file.separator}"
 	-->
 	<property name="path:git:phpmyadmin" value="${path:git}phpmyadmin${file.separator}" />
-
-	<!--
-		Path to your PHPExcel git repository.
-		The declaration uses your git path, change if necessary.
-		Original: "<git-path>phpexcel/" = "${path:git}phpexcel${file.separator}"
-	-->
-	<property name="path:git:phpexcel" value="${path:git}phpexcel${file.separator}" />
-
-	<!--
-		Path to your PHPExcelHelper git repository.
-		The declaration uses your git path, change if necessary.
-		Original: "<git-path>phpexcelhelper/" = "${path:git}phpexcelhelper${file.separator}"
-	-->
-	<property name="path:git:phpexcelhelper" value="${path:git}phpexcelhelper${file.separator}" />
-
 
 
 	<!-- Apache www home -->
@@ -75,11 +60,11 @@
 	<property name="path:apache:phpmyadmin" value="${path:apache}phpmyadmin${file.separator}" />
 
 	<!--
-		Path to your refereemanager apache directory.
+		Path to your cinemap apache directory.
 		The declaration uses your apache home path, change if necessary.
-		Original: "<apache-path>refereemanager/" = "${path:apache}refereemanager${file.separator}"
+		Original: "<apache-path>cinemap/" = "${path:apache}cinemap${file.separator}"
 	-->
-	<property name="path:apache:refereemanager" value="${path:apache}refereemanager${file.separator}" />
+	<property name="path:apache:cinemap" value="${path:apache}cinemap${file.separator}" />
 
 
 

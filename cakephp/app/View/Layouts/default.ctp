@@ -47,7 +47,7 @@
 
 					<div class="sixteen columns">
 
-						<h1><?php echo $this->Html->link(__('Schiedsrichterverwaltung'), array('controller' => 'pages', 'action' => 'display', 'home')); ?></h1>
+						<h1><?php echo $this->Html->link(__('Cinemap'), array('controller' => 'pages', 'action' => 'display', 'home')); ?></h1>
 
 					</div><!-- end sixteen -->
 
@@ -63,25 +63,24 @@
 
 						<?php
 						$navarray = array(
-															array('title' => __('Schiedsrichter'), 'routing' => array('action' => 'index', 'controller' => 'referees'),
+															array('title' => __('Locations'), 'routing' => array('action' => 'index', 'controller' => 'locations'),
 																		'subnav' => array(
-																											array('title' => __('Ansehen'), 'routing' => array('action' => 'index', 'controller' => 'referees')),
-																											//array('title' => __('Suchen'), 'routing' => array('action' => 'search', 'controller' => 'referees')),
-																											//array('title' => __('Hinzufügen'), 'routing' => array('action' => 'add', 'controller' => 'referees')),
+																											array('title' => __('List'), 'routing' => array('action' => 'index', 'controller' => 'locations')),
+																											//array('title' => __('Search'), 'routing' => array('action' => 'search', 'controller' => 'locations')),
+																											array('title' => __('Add'), 'routing' => array('action' => 'add', 'controller' => 'locations')),
 																											)
 																		),
-															array('title' => __('Schiedsrichtereinsätze'), 'routing' => array('action' => 'index', 'controller' => 'assignments'),
+															array('title' => __('Movies'), 'routing' => array('action' => 'index', 'controller' => 'movies'),
 																		'subnav' => array(
-																											array('title' => __('Ansehen'), 'routing' => array('action' => 'index', 'controller' => 'assignments')),
-																											//array('title' => __('Suchen'), 'routing' => array('action' => 'search', 'controller' => 'assignments')),
-																											//array('title' => __('Hinzufügen'), 'routing' => array('action' => 'add', 'controller' => 'assignments')),
+																											array('title' => __('List'), 'routing' => array('action' => 'index', 'controller' => 'movies')),
+																											//array('title' => __('Search'), 'routing' => array('action' => 'search', 'controller' => 'movies')),
+																											array('title' => __('Add'), 'routing' => array('action' => 'add', 'controller' => 'movies')),
 																											)
 																		),
-															array('title' => __('Teams'), 'routing' => array('action' => 'index', 'controller' => 'teams'),
+															array('title' => __('Users'), 'routing' => array('action' => 'index', 'controller' => 'users'),
 																		'subnav' => array(
-																											array('title' => __('Ansehen'), 'routing' => array('action' => 'index', 'controller' => 'teams')),
-																											//array('title' => __('Suchen'), 'routing' => array('action' => 'search', 'controller' => 'teams')),
-																											//array('title' => __('Hinzufügen'), 'routing' => array('action' => 'add', 'controller' => 'teams')),
+																											array('title' => __('List'), 'routing' => array('action' => 'index', 'controller' => 'users')),
+																											array('title' => __('Add'), 'routing' => array('action' => 'add', 'controller' => 'users')),
 																											)
 																		),
 															);
@@ -99,7 +98,7 @@
 					<div class="container">
 						<div class="sixteen columns">
 							<p>
-								Eingeloggt als: "<?php echo $username; ?>"
+								Logged in as: "<?php echo $username; ?>"
 								(<?php echo $this->Html->link(__('Logout'), array('action' => 'logout', 'controller' => 'users'), array('class' => '')); ?>)
 							</p>
 						</div><!-- end sixteen -->
@@ -134,7 +133,7 @@
 					<div class="four columns">
 
 						<ul>
-							<li><?php echo $this->Html->link(__('Schiedsrichter-Homepage'), 'http://schiri.bettv.de/'); ?></li>
+							<li><?php echo $this->Html->link(__('Cinemap Home'), 'http://www.cinemap.de/'); ?></li>
 						</ul>
 
 					</div><!-- end four -->
