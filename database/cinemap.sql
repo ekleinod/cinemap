@@ -145,10 +145,10 @@ DROP TABLE IF EXISTS `cinemap_text_types` ;
 
 CREATE  TABLE IF NOT EXISTS `cinemap_text_types` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `title` VARCHAR(100) NOT NULL ,
+  `sid` VARCHAR(100) NOT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
-  UNIQUE INDEX `tag_UNIQUE` (`title` ASC) )
+  UNIQUE INDEX `tag_UNIQUE` (`sid` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci
@@ -165,7 +165,7 @@ CREATE  TABLE IF NOT EXISTS `cinemap_texts` (
   `item_id` INT UNSIGNED NOT NULL ,
   `language_id` INT UNSIGNED NOT NULL ,
   `text_type_id` INT UNSIGNED NOT NULL ,
-  `text_type` VARCHAR(100) NOT NULL ,
+  `text_type` VARCHAR(100) NULL ,
   `value` TEXT NULL ,
   `created` DATETIME NOT NULL ,
   `modified` DATETIME NOT NULL ,
@@ -185,10 +185,10 @@ DROP TABLE IF EXISTS `cinemap_reference_roles` ;
 
 CREATE  TABLE IF NOT EXISTS `cinemap_reference_roles` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `title` VARCHAR(100) NOT NULL ,
+  `sid` VARCHAR(100) NOT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
-  UNIQUE INDEX `tag_UNIQUE` (`title` ASC) )
+  UNIQUE INDEX `tag_UNIQUE` (`sid` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci
