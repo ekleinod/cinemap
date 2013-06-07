@@ -1,6 +1,7 @@
 <?php echo $this->Session->flash('auth'); ?>
 
 <?php echo $this->Form->create('User'); ?>
+
 	<fieldset>
 		<legend><?php echo __('Core information'); ?></legend>
 		<ol>
@@ -69,7 +70,8 @@
 				$input = $this->Form->text('User.email',
 						array('type' => 'text',
 									'placeholder' => __('xyz@xyz.com'), 'title' => __('Email'),
-									'maxlength' => '100')
+									'maxlength' => '100',
+									'required' => 'false')
 				);
 				echo $this->Html->tag('li',
 						$label . $input,
@@ -81,7 +83,8 @@
 				$input = $this->Form->text('User.url',
 						array('type' => 'text',
 									'placeholder' => __('http://www.xyz.com/'), 'title' => __('URL'),
-									'maxlength' => '100')
+									'maxlength' => '100',
+									'required' => 'false')
 				);
 				echo $this->Html->tag('li',
 						$label . $input,

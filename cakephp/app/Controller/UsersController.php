@@ -83,13 +83,22 @@ class UsersController extends AppController {
 	 */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->User->create();
-			$this->request->data['User']['salt'] = Security::generateAuthKey();
-			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved'));
-				$this->redirect(array('action' => 'index'));
+
+			$this->loadModel('Item');
+			$this->Item->create();
+			$newItem = $this->Item->save();
+			if ($newItem) {
+				$this->User->create();
+				$this->request->data['User']['salt'] = Security::generateAuthKey();
+				$this->request->data['User']['item_id'] = $newItem['Item']['id'];
+				if ($this->User->save($this->request->data)) {
+					$this->Session->setFlash(__('The user has been saved'));
+					$this->redirect(array('action' => 'index'));
+				} else {
+					$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				}
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The user could not be saved, because the item could not be saved. Please, try again.'));
 			}
 		}
 		$userRoles = $this->User->UserRole->find('list');
