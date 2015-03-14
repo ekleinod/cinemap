@@ -3,24 +3,24 @@
 var movies = new L.LayerGroup();
 
 // Æon Flux
-L.marker([52.5190, 13.3647])
-	.bindPopup('<b>Æon Flux</b><br />Headquarter (Entry).<br /><a href="#">Image</a><br /><a href="#">Details</a>')
+L.marker([52.5190, 13.3647], {title: 'Æon Flux: Headquarter (Entry)', opacity: .6})
+	.bindPopup('<strong>Æon Flux</strong><br />Headquarter (Entry).<br /><a href="#">Image</a><br /><a href="#">Details</a>')
 	.addTo(movies);
 L.marker([52.4315, 13.5303])
-	.bindPopup('<b>Æon Flux</b><br />Headquarter (Hallway).<br /><a href="#">Image</a><br /><a href="#">Details</a>')
+	.bindPopup('<strong>Æon Flux</strong><br />Headquarter (Hallway).<br /><a href="#">Image</a><br /><a href="#">Details</a>')
 	.addTo(movies);
 L.marker([52.5751, 13.5455])
-	.bindPopup('<b>Æon Flux</b><br />Headquarter (Inner court).<br /><a href="#">Image</a><br /><a href="#">Details</a>')
+	.bindPopup('<strong>Æon Flux</strong><br />Headquarter (Inner court).<br /><a href="#">Image</a><br /><a href="#">Details</a>')
 	.addTo(movies);
 
 // Around the World in 80 Days
 L.marker([52.5136, 13.3928])
-	.bindPopup('<b>Around the World in 80 Days</b><br />Some place.<br /><a href="#">Image</a><br /><a href="#">Details</a>')
+	.bindPopup('<strong>Around the World in 80 Days</strong><br />Some place.<br /><a href="#">Image</a><br /><a href="#">Details</a>')
 	.addTo(movies);
 
 // V for Vendetta
 L.marker([52.5136, 13.3922])
-	.bindPopup('<b>V for Vendetta</b><br />Palace.<br /><a href="#">Image</a><br /><a href="#">Details</a>')
+	.bindPopup('<strong>V for Vendetta</strong><br />Palace.<br /><a href="#">Image</a><br /><a href="#">Details</a>')
 	.addTo(movies);
 
 // marker end
@@ -49,6 +49,8 @@ var overlays = {
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
+
+L.control.scale().addTo(map);
 
 // popup at mouse click
 var popup = L.popup();
